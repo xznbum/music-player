@@ -48,6 +48,8 @@
       <exported-key name="#FAKE_auth_user_groups_2" table="auth_user_groups" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_auth_user_user_permissions_2" table="auth_user_user_permissions" schema="" catalog="" columns="user_id"/>
       <exported-key name="#FAKE_django_admin_log_1" table="django_admin_log" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_musicplayer_comment_1" table="musicplayer_comment" schema="" catalog="" columns="user_id"/>
+      <exported-key name="#FAKE_musicplayer_playlist_1" table="musicplayer_playlist" schema="" catalog="" columns="user_id"/>
     </table>
     <table name="auth_user_groups" schema="" catalog="" type="TABLE">
       <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
@@ -106,6 +108,65 @@
       <column name="expire_date" sqlType="DATETIME" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
       <primary-key columns="session_key"/>
       <index name="django_session_de54fa62" unique="true" columns="expire_date"/>
+    </table>
+    <table name="musicplayer_comment" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="text" sqlType="VARCHAR(500)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="rating" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="music_composition_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_musicplayer_comment_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_musicplayer_comment_2" columns="music_composition_id" ref-table="musicplayer_musiccomposition" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="musicplayer_comment_e8701ad4" unique="true" columns="user_id"/>
+      <index name="musicplayer_comment_c4c8748b" unique="true" columns="music_composition_id"/>
+    </table>
+    <table name="musicplayer_compositor" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_musicplayer_musiccomposition_2" table="musicplayer_musiccomposition" schema="" catalog="" columns="compositor_id"/>
+    </table>
+    <table name="musicplayer_genre" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <primary-key columns="id"/>
+      <exported-key name="#FAKE_musicplayer_musiccomposition_1" table="musicplayer_musiccomposition" schema="" catalog="" columns="genre_id"/>
+    </table>
+    <table name="musicplayer_musiccomposition" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="duration" sqlType="REAL" precision="2000000000" scale="10" nullable="false" jdbcType="6"/>
+      <column name="rating_listen" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="rating_user" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="compositor_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="genre_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_musicplayer_musiccomposition_1" columns="genre_id" ref-table="musicplayer_genre" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_musicplayer_musiccomposition_2" columns="compositor_id" ref-table="musicplayer_compositor" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_musicplayer_comment_2" table="musicplayer_comment" schema="" catalog="" columns="music_composition_id"/>
+      <exported-key name="#FAKE_musicplayer_playlist_music_compositions_1" table="musicplayer_playlist_music_compositions" schema="" catalog="" columns="musiccomposition_id"/>
+      <index name="musicplayer_musiccomposition_080a38f3" unique="true" columns="genre_id"/>
+      <index name="musicplayer_musiccomposition_8a73a821" unique="true" columns="compositor_id"/>
+    </table>
+    <table name="musicplayer_playlist" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="VARCHAR(200)" precision="2000000000" scale="10" nullable="false" jdbcType="12"/>
+      <column name="user_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_musicplayer_playlist_1" columns="user_id" ref-table="auth_user" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <exported-key name="#FAKE_musicplayer_playlist_music_compositions_2" table="musicplayer_playlist_music_compositions" schema="" catalog="" columns="playlist_id"/>
+      <index name="musicplayer_playlist_e8701ad4" unique="true" columns="user_id"/>
+    </table>
+    <table name="musicplayer_playlist_music_compositions" schema="" catalog="" type="TABLE">
+      <column name="id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="playlist_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <column name="musiccomposition_id" sqlType="INTEGER" precision="2000000000" scale="10" nullable="false" jdbcType="4"/>
+      <primary-key columns="id"/>
+      <foreign-key name="#FAKE_musicplayer_playlist_music_compositions_1" columns="musiccomposition_id" ref-table="musicplayer_musiccomposition" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <foreign-key name="#FAKE_musicplayer_playlist_music_compositions_2" columns="playlist_id" ref-table="musicplayer_playlist" ref-schema="" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="3" deferrability="1"/>
+      <index name="musicplayer_playlist_music_compositions_0a7c34a4" unique="true" columns="musiccomposition_id"/>
+      <index name="musicplayer_playlist_music_compositions_5d3a6442" unique="true" columns="playlist_id"/>
     </table>
     <table name="sqlite_sequence" schema="" catalog="" type="TABLE">
       <column name="name" sqlType="" precision="2000000000" scale="10" nullable="true" jdbcType="12"/>
