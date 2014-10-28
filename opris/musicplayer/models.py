@@ -7,9 +7,15 @@ from django.contrib.auth.models import User
 class Compositor(models.Model):
     name = models.CharField(max_length=200)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Genre(models.Model):
     name = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.name
 
 
 class MusicComposition(models.Model):
@@ -20,11 +26,17 @@ class MusicComposition(models.Model):
     rating_listen = models.IntegerField(default=0)
     rating_user = models.IntegerField(default=0)
 
+    def __unicode__(self):
+        return self.name
+
 
 class Playlist(models.Model):
     user = models.ForeignKey(User)
     name = models.CharField(max_length=200)
     music_compositions = models.ManyToManyField(MusicComposition)
+
+    def __unicode__(self):
+        return self.name
 
 
 class Comment(models.Model):
@@ -32,3 +44,6 @@ class Comment(models.Model):
     music_composition = models.ForeignKey(MusicComposition)
     text = models.CharField(max_length=500)
     rating = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return self.text
