@@ -24,6 +24,9 @@
         <div class="container">
           <a class="brand" href="#">Music Player</a>
           <ul class="nav">
+            <form action="{% url 'search_track' %}" class="navbar-search" method="get">
+                <input class="search-query" type="search" name="q" placeholder="Поиск">
+            </form>
             <li class="active"><a href="{% url 'home' %}">Главная</a></li>
             <li><a href="{% url 'audiotracks' %}">Треки</a></li>
             {% if user.is_authenticated %}
