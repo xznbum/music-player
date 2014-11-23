@@ -27,7 +27,7 @@
             <form action="{% url 'search_track' %}" class="navbar-search" method="get">
                 <input class="search-query" type="search" name="q" placeholder="Поиск">
             </form>
-            <li class="active"><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'home' %}">Главная</a></li>
             <li><a href="{% url 'audiotracks' %}">Треки</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'user_index' user.username %}">{% trans 'Мои треки' %}</a></li>
@@ -37,12 +37,14 @@
             {% endif %}
           </ul>
           {% if not user.is_authenticated %}
-          <form action="{% url 'login' %}" class="navbar-form pull-right" method="post">
-            {% csrf_token %}
-            <input class="input-small" type="text" name="username" placeholder="Логин">
-            <input class="input-small" type="password" name="password" placeholder="Пароль">
-            <button class="btn" type="submit">Войти</button>
-          </form>
+              {% block login %}
+                <form action="{% url 'login' %}" class="navbar-form pull-right" method="post">
+                    {% csrf_token %}
+                    <input class="input-small" type="text" name="username" placeholder="Логин">
+                    <input class="input-small" type="password" name="password" placeholder="Пароль">
+                    <button class="btn" type="submit">Войти</button>
+                </form>
+            {% endblock %}
           {% endif %}
         </div>
       </div>

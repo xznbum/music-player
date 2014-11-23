@@ -17,8 +17,9 @@ urlpatterns = patterns('',
     url(r'^$', 'musicplayer.views.index', name="home"),
     url("^music", include("audiotracks.urls")),
     url("^(?P<username>[\w\._-]+)/music", include("audiotracks.urls")),
-    url(r'^login$', 'django.contrib.auth.views.login', name="login"),
-    url(r'^logout$', 'django.contrib.auth.views.logout', name="logout"),
+    url(r'^login/', 'django.contrib.auth.views.login', name="login"),
+    url(r'^logout/', 'django.contrib.auth.views.logout', name="logout"),
+    url(r'^register/', 'musicplayer.views.register', name="register"),
     url(r'^admin/', include(admin.site.urls)),
 )
 

@@ -1,1 +1,9 @@
-Logged out
+{% extends 'base.html' %}
+{% block body %}
+<p>
+    Вы вышли из системы! Приходите еще!
+</p>
+<ul>
+  <li><a href="{% url 'audiotracks' %}">Перейти к аудиотрекам</a></li>
+</ul>
+{% endblock %}
