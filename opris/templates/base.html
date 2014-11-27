@@ -14,7 +14,7 @@
 
     <!-- Le styles -->
     <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap-2.0.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css"> 
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
     {% block extra_head %}{% endblock %}
   </head>
 
@@ -22,18 +22,19 @@
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#">Music Player</a>
+          <a class="brand" href="/">Music Player</a>
           <ul class="nav">
             <form action="{% url 'search_track' %}" class="navbar-search" method="get">
                 <input class="search-query" type="search" name="q" placeholder="Поиск">
             </form>
             <li><a href="{% url 'home' %}">Главная</a></li>
+            <li><a href="{% url 'top_tracks' %}">Топ-100</a></li>
             <li><a href="{% url 'audiotracks' %}">Треки</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'user_index' user.username %}">{% trans 'Мои треки' %}</a></li>
                 <li><a href="{% url 'upload_track' %}">{% trans 'Загрузить' %}</a></li>
                 {% if user.is_staff %}<li><a href="/admin">Админка</a></li>{% endif %}
-                <li><a href="{% url 'logout' %}">Выйти</a></li>
+                <li><a href="{% url 'logout' %}">Выйти <font color="#ffffff">({{ user.username }})</font></a></li>
             {% endif %}
           </ul>
           {% if not user.is_authenticated %}
