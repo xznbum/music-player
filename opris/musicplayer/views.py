@@ -19,7 +19,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False) # TODO: !!!!!!!!
-            # user.save()
+            user.save()
             # newuser = auth.authenticate(username=newuser_form.clean_username(), password=newuser_form.clean_password2())
             # auth.login(request, newuser)
             return redirect('/')
