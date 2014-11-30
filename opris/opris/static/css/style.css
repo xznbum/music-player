@@ -10,7 +10,7 @@ body {
   margin: 12px 0;
 }
 .container {
-  width: 1000px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
+  width: 1100px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
 }
 
 /* The white background content wrapper */
@@ -137,7 +137,7 @@ ul.audiotracks-list li {
 .audiotracks-detail .audiotracks-list-entry {
   margin: 12px 12px 24px 12px;
   float: left;
-  width: 976px; /* 1000 - (2 * 12) */
+  width: 1076px; /* 1100 - (2 * 12) */
 }
 
 .audiotracks-detail img:first-child {

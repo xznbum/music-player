@@ -31,6 +31,7 @@
             <li><a href="{% url 'top_tracks' %}">Топ-100</a></li>
             <li><a href="{% url 'audiotracks' %}">Треки</a></li>
             {% if user.is_authenticated %}
+                <li><a href="{% url 'user_playlist' user.username %}">{% trans 'Мой плейлист' %}</a></li>
                 <li><a href="{% url 'user_index' user.username %}">{% trans 'Мои треки' %}</a></li>
                 <li><a href="{% url 'upload_track' %}">{% trans 'Загрузить' %}</a></li>
                 {% if user.is_staff %}<li><a href="/admin">Админка</a></li>{% endif %}
