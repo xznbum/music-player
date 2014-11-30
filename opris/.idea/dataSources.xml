@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Django default" uuid="cc820da8-f0b1-4fba-910f-13d37906d1da">
       <driver-ref>sqlite.xerial</driver-ref>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\OPRIS\music-player-master\music-player-master\opris\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:E:\Programming\Code\Python\music-player\opris\db.sqlite3</jdbc-url>
       <libraries />
     </data-source>
   </component>
